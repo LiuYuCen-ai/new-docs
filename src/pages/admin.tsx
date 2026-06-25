@@ -1,7 +1,8 @@
 import type {ReactNode, FormEvent} from 'react';
 import {useState, useEffect, useCallback} from 'react';
 import Layout from '@theme/Layout';
-import Translate from '@docusaurus/Translate';
+import Head from '@docusaurus/Head';
+import Translate, {translate} from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 interface DocFile {
@@ -19,7 +20,15 @@ const TOKEN_KEY = 'new-api-docs-admin-token';
 
 function getAdminApiUrl(): string {
   if (typeof window === 'undefined') return '';
-  return process.env.ADMIN_API_URL || `${window.location.protocol}//${window.location.hostname}:4000`;
+  return `${window.location.protocol}//${window.location.hostname}:4000`;
+}
+
+function AdminHead(): ReactNode {
+  return (
+    <Head>
+      <meta name="robots" content="noindex, nofollow" />
+    </Head>
+  );
 }
 
 export default function AdminPage(): ReactNode {
@@ -46,27 +55,34 @@ export default function AdminPage(): ReactNode {
 
   useEffect(() => {
     const saved = localStorage.getItem(TOKEN_KEY);
-    if (saved) {
-      fetch(`${apiUrl}/api/auth/me`, {headers: {Authorization: `Bearer ${saved}`}})
-        .then(r => (r.ok ? r.json() : Promise.reject()))
-        .then(data => setAuth({token: saved, username: data.username}))
-        .catch(() => localStorage.removeItem(TOKEN_KEY));
-    }
+    if (!saved || !apiUrl) return;
+
+    fetch(`${apiUrl}/api/auth/me`, {headers: {Authorization: `Bearer ${saved}`}})
+      .then(async r => {
+        if (!r.ok) throw new Error('Session expired');
+        return r.json();
+      })
+      .then(data => setAuth({token: saved, username: data.username}))
+      .catch(() => localStorage.removeItem(TOKEN_KEY));
   }, [apiUrl]);
 
   const loadDocs = useCallback(async () => {
-    if (!auth.token) return;
-    const res = await fetch(`${apiUrl}/api/docs?locale=${i18n.currentLocale}`, {
-      headers: authHeaders(),
-    });
-    if (res.ok) {
-      const data = await res.json();
-      setDocs(data.files);
+    if (!auth.token || !apiUrl) return;
+    try {
+      const res = await fetch(`${apiUrl}/api/docs?locale=${i18n.currentLocale}`, {
+        headers: authHeaders(),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setDocs(data.files ?? []);
+      }
+    } catch {
+      // Admin server may be offline during local dev
     }
   }, [auth.token, apiUrl, authHeaders, i18n.currentLocale]);
 
   useEffect(() => {
-    loadDocs();
+    void loadDocs();
   }, [loadDocs]);
 
   const handleLogin = async (e: FormEvent) => {
@@ -84,7 +100,7 @@ export default function AdminPage(): ReactNode {
       localStorage.setItem(TOKEN_KEY, data.token);
       setAuth({token: data.token, username: data.username});
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Login failed');
+      setError(err instanceof Error ? err.message : 'Login failed. Is the admin server running on port 4000?');
     } finally {
       setLoading(false);
     }
@@ -98,21 +114,25 @@ export default function AdminPage(): ReactNode {
   };
 
   const openDoc = async (docPath: string) => {
-    if (!auth.token) return;
-    const res = await fetch(
-      `${apiUrl}/api/docs/content?path=${encodeURIComponent(docPath)}&locale=${i18n.currentLocale}`,
-      {headers: authHeaders()},
-    );
-    if (res.ok) {
-      const data = await res.json();
-      setSelectedDoc(docPath);
-      setContent(data.content);
-      setSaveMsg('');
+    if (!auth.token || !apiUrl) return;
+    try {
+      const res = await fetch(
+        `${apiUrl}/api/docs/content?path=${encodeURIComponent(docPath)}&locale=${i18n.currentLocale}`,
+        {headers: authHeaders()},
+      );
+      if (res.ok) {
+        const data = await res.json();
+        setSelectedDoc(docPath);
+        setContent(data.content);
+        setSaveMsg('');
+      }
+    } catch {
+      setSaveMsg(translate({id: 'admin.loadFailed', message: 'Failed to load document.'}));
     }
   };
 
   const saveDoc = async () => {
-    if (!auth.token || !selectedDoc) return;
+    if (!auth.token || !selectedDoc || !apiUrl) return;
     setLoading(true);
     setSaveMsg('');
     try {
@@ -123,9 +143,9 @@ export default function AdminPage(): ReactNode {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Save failed');
-      setSaveMsg('Saved successfully!');
+      setSaveMsg(translate({id: 'admin.saved', message: 'Saved successfully!'}));
     } catch (err) {
-      setSaveMsg(err instanceof Error ? err.message : 'Save failed');
+      setSaveMsg(err instanceof Error ? err.message : translate({id: 'admin.saveFailed', message: 'Save failed'}));
     } finally {
       setLoading(false);
     }
@@ -133,7 +153,8 @@ export default function AdminPage(): ReactNode {
 
   if (!auth.token) {
     return (
-      <Layout title="Admin Login" description="Admin login for New API documentation" noindex>
+      <Layout title="Admin Login" description="Admin login for Webchannel documentation">
+        <AdminHead />
         <main className="container margin-vert--xl" style={{maxWidth: 420}}>
           <h1>
             <Translate id="admin.loginTitle">Admin Login</Translate>
@@ -145,7 +166,9 @@ export default function AdminPage(): ReactNode {
           </p>
           <form onSubmit={handleLogin}>
             <div className="margin-bottom--md">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="username">
+                <Translate id="admin.username">Username</Translate>
+              </label>
               <input
                 id="username"
                 className="input"
@@ -156,7 +179,9 @@ export default function AdminPage(): ReactNode {
               />
             </div>
             <div className="margin-bottom--md">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">
+                <Translate id="admin.password">Password</Translate>
+              </label>
               <input
                 id="password"
                 type="password"
@@ -169,7 +194,7 @@ export default function AdminPage(): ReactNode {
             </div>
             {error && <p style={{color: 'var(--ifm-color-danger)'}}>{error}</p>}
             <button type="submit" className="button button--primary" disabled={loading}>
-              {loading ? '...' : 'Login'}
+              {loading ? '...' : <Translate id="admin.loginButton">Login</Translate>}
             </button>
           </form>
         </main>
@@ -178,7 +203,8 @@ export default function AdminPage(): ReactNode {
   }
 
   return (
-    <Layout title="Admin Panel" description="Documentation admin panel" noindex>
+    <Layout title="Admin Panel" description="Documentation admin panel">
+      <AdminHead />
       <main className="container margin-vert--lg">
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
           <h1>
@@ -187,7 +213,7 @@ export default function AdminPage(): ReactNode {
           <div>
             <span className="margin-right--md">{auth.username}</span>
             <button className="button button--secondary button--sm" onClick={handleLogout}>
-              Logout
+              <Translate id="admin.logout">Logout</Translate>
             </button>
           </div>
         </div>
@@ -198,7 +224,12 @@ export default function AdminPage(): ReactNode {
         </p>
         <div style={{display: 'grid', gridTemplateColumns: '280px 1fr', gap: '1rem', minHeight: '60vh'}}>
           <aside style={{borderRight: '1px solid var(--ifm-color-emphasis-300)', paddingRight: '1rem'}}>
-            <h3>Documents ({i18n.currentLocale})</h3>
+            <h3>
+              {translate(
+                {id: 'admin.docsList', message: 'Documents ({locale})'},
+                {locale: i18n.currentLocale},
+              )}
+            </h3>
             <ul style={{listStyle: 'none', padding: 0}}>
               {docs.map(doc => (
                 <li key={doc.path} style={{marginBottom: '0.25rem'}}>
@@ -231,13 +262,15 @@ export default function AdminPage(): ReactNode {
                 />
                 <div style={{marginTop: '1rem'}}>
                   <button className="button button--primary" onClick={saveDoc} disabled={loading}>
-                    Save
+                    <Translate id="admin.save">Save</Translate>
                   </button>
                   {saveMsg && <span className="margin-left--md">{saveMsg}</span>}
                 </div>
               </>
             ) : (
-              <p>Select a document from the sidebar to edit.</p>
+              <p>
+                <Translate id="admin.selectDoc">Select a document from the sidebar to edit.</Translate>
+              </p>
             )}
           </section>
         </div>

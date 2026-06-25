@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: Installation
-description: Install New API using Docker, Docker Compose, or manual deployment.
+description: Install Webchannel using Docker, Docker Compose, or manual deployment.
 ---
 
 # Installation

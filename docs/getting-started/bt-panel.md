@@ -1,12 +1,12 @@
 ---
 sidebar_position: 4
 title: BT Panel Deployment
-description: Deploy New API on Baota (BT) Panel using Docker.
+description: Deploy Webchannel on Baota (BT) Panel using Docker.
 ---
 
 # BT Panel Deployment
 
-This guide covers deploying New API using the Baota (宝塔) Panel Docker feature.
+This guide covers deploying Webchannel using the Baota (BT) Panel Docker feature.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ This guide covers deploying New API using the Baota (宝塔) Panel Docker featur
 2. Click **Docker** in the left menu
 3. Click **Install Now** when prompted
 
-## Step 2: Install New API
+## Step 2: Install Webchannel
 
 ### Method A: App Store (Recommended)
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: Authentication
-description: OAuth, OIDC, and API key authentication in New API.
+description: OAuth, OIDC, and API key authentication in Webchannel.
 ---
 
 # Authentication

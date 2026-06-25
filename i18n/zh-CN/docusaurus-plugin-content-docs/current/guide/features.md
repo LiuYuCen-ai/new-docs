@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: 功能特性
-description: New API 核心功能包括 UI、计费、安全和智能路由。
+description: Webchannel 核心功能包括 UI、计费、安全和智能路由。
 ---
 
 # 功能特性概览

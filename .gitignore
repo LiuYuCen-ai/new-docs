@@ -8,9 +8,15 @@
 .docusaurus
 .cache-loader
 
+# Python
+__pycache__/
+*.pyc
+
 # Misc
 .DS_Store
-.env.local
+.env
+data/*.apifox.json
+admin-server/.env
 .env.development.local
 .env.test.local
 .env.production.local

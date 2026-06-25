@@ -1,39 +1,39 @@
 ---
 sidebar_position: 2
-title: Supported Models
-description: AI models and API formats supported by New API gateway.
+title: Supported Models & Services
+description: AI models and services available through the enterprise API gateway.
 ---
 
-# Supported Models
+# Supported Models & Services
 
-New API supports 40+ upstream providers through a unified gateway interface.
+The enterprise API gateway exposes **135 endpoints** across the following service categories:
 
-## Model Types
+## Text & Chat
 
-| Type | Description | Endpoint |
-|------|-------------|----------|
-| OpenAI Compatible | Chat, embeddings, images, audio | `/v1/chat/completions` |
-| OpenAI Responses | Responses API format | `/v1/responses` |
-| Claude Messages | Anthropic Messages format | `/v1/messages` |
-| Google Gemini | Gemini native format | `/v1beta/models/*` |
-| Midjourney | Image generation via Midjourney-Proxy | `/mj/*` |
-| Suno | Music generation | `/suno/*` |
-| Rerank | Cohere, Jina rerank models | `/v1/rerank` |
+| Service | Format | Key Endpoints |
+|---------|--------|---------------|
+| OpenAI | Chat Completions, Responses | `/v1/chat/completions`, `/v1/responses` |
+| Anthropic Claude | Messages API | `/v1/messages` |
+| Google Gemini | Native generateContent | `/v1beta/models/{model}:generateContent` |
 
-## Supported Interfaces
+## Image Generation
 
-- **Chat Completions** — Standard chat interface
-- **Responses** — OpenAI Responses API
-- **Images** — Image generation and editing
-- **Audio** — Transcription and speech synthesis
-- **Embeddings** — Vector embeddings
-- **Rerank** — Document reranking
-- **Realtime** — Real-time conversation sessions
+| Service | Description | Doc |
+|---------|-------------|-----|
+| OpenAI Images | DALL-E, GPT Image | [OpenAI](../api/openai) |
+| Gemini | Image gen & edit | [Gemini](../api/gemini) |
 
-## Custom Upstream
+## Model Discovery
 
-Configure any legally authorized upstream endpoint as a custom channel. New API handles routing, billing, and format conversion automatically.
+```bash
+curl https://your-gateway.com/v1/models \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
 
-:::info API Reference
-See the [API Reference](/api-reference) page or [Apifox documentation](https://ppf3lcwzqr.apifox.cn/) for detailed endpoint specifications.
-:::
+See [Models API](../api/models) for details.
+
+## Full API Reference
+
+- [API Overview](/docs/) — All categories
+- [Interactive Reference](/api-reference) — Redoc browser
+- [Apifox](https://ppf3lcwzqr.apifox.cn/) — Try it out online

@@ -5,7 +5,14 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
+    "start:all-locales": "npm run preview",
     "start:zh": "docusaurus start --locale zh-CN",
+    "start:zh-tw": "docusaurus start --locale zh-TW",
+    "start:fr": "docusaurus start --locale fr",
+    "start:ja": "docusaurus start --locale ja",
+    "start:ru": "docusaurus start --locale ru",
+    "start:vi": "docusaurus start --locale vi",
+    "preview": "docusaurus build && docusaurus serve --host 0.0.0.0",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -15,7 +22,8 @@
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
     "admin": "cd admin-server && npm start",
-    "admin:install": "cd admin-server && npm install",
+    "generate:api-docs": "python3 scripts/generate-api-docs.py && python3 scripts/write_doc_pages.py",
+    "setup:i18n": "python3 scripts/setup-i18n.py",
     "dev:all": "concurrently \"npm start\" \"npm run admin\""
   },
   "dependencies": {

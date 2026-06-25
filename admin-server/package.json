@@ -2,7 +2,7 @@
   "name": "new-api-docs-admin",
   "version": "1.0.0",
   "private": true,
-  "description": "Admin API server for New API documentation CMS",
+  "description": "Admin API server for Webchannel documentation CMS",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

@@ -34,7 +34,6 @@ Set `"stream": true` for server-sent events (SSE) streaming responses.
 curl https://your-gateway.com/v1/messages \
   -H "Authorization: Bearer sk-xxx" \
   -H "Content-Type: application/json" \
-  -H "anthropic-version: 2023-06-01" \
   -d '{
     "model": "claude-sonnet-4-20250514",
     "max_tokens": 1024,

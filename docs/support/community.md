@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Community
-description: Community channels and support resources for New API.
+description: Community channels and support resources for Webchannel.
 ---
 
 # Community & Support
@@ -34,4 +34,4 @@ We welcome contributions! Please read the contributing guidelines in the GitHub 
 
 ### Translation
 
-New API supports multiple languages. Help translate documentation by submitting PRs to the `new-api-docs` project or using the admin panel (for authorized editors).
+Webchannel supports multiple languages. Help translate documentation by submitting PRs to the `new-api-docs` project or using the admin panel (for authorized editors).

@@ -1,15 +1,13 @@
 ---
+slug: /
 sidebar_position: 1
 title: API Overview
-description: New API gateway endpoints and authentication overview.
+description: Enterprise AI gateway API — OpenAI, Claude, Gemini, and more.
 ---
 
 # API Overview
 
-New API provides two categories of APIs:
-
-1. **Relay API** — OpenAI-compatible endpoints for AI model inference
-2. **Management API** — Dashboard and administration endpoints
+Unified AI service gateway providing access to **ChatGPT**, **Claude**, and **Gemini** models through a single API key.
 
 ## Base URL
 
@@ -17,39 +15,39 @@ New API provides two categories of APIs:
 https://your-gateway.com
 ```
 
+Replace with your Webchannel deployment URL or provider endpoint.
+
 ## Authentication
+
+All relay endpoints use Bearer token authentication:
 
 ```http
 Authorization: Bearer YOUR_API_KEY
 ```
 
-## Relay Endpoints
+```bash
+curl https://your-gateway.com/v1/models \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
 
-| Method | Path | Description |
-|--------|------|-------------|
-| POST | `/v1/chat/completions` | Chat completions |
-| POST | `/v1/responses` | OpenAI Responses |
-| POST | `/v1/embeddings` | Embeddings |
-| POST | `/v1/images/generations` | Image generation |
-| POST | `/v1/audio/transcriptions` | Audio transcription |
-| POST | `/v1/messages` | Claude Messages |
-| POST | `/v1/rerank` | Rerank documents |
+## API Categories
 
-## Interactive Documentation
+| Category | Description | Doc |
+|----------|-------------|-----|
+| Models | List available models | [Models](./api/models) |
+| OpenAI Format | ChatGPT, Responses, Embeddings, Images, and more | [OpenAI Format](./api/openai) |
+| Anthropic Format | Claude Messages API | [Anthropic Format](./api/anthropic) |
+| Google Gemini | Gemini generateContent and streamGenerateContent | [Google Gemini](./api/gemini) |
 
-:::tip Apifox Live Docs
-Browse the full interactive API documentation on **[Apifox](https://ppf3lcwzqr.apifox.cn/)** with request examples and try-it-out functionality.
-:::
+**135 endpoints** documented from Apifox export.
 
-You can also use our built-in **[API Reference](/api-reference)** page powered by OpenAPI specs.
+## Interactive Reference
+
+Browse the full API on the [interactive reference page](/api-reference) or try endpoints on [Apifox](https://ppf3lcwzqr.apifox.cn/).
 
 ## OpenAPI Specs
 
-Download OpenAPI specifications:
+Download machine-readable specifications:
 
-- [Relay API](/openapi/relay.json) — AI model relay endpoints
-- [Management API](/openapi/api.json) — Admin and dashboard endpoints
-
-## Rate Limits
-
-Rate limits are configurable per user, token, and model. Default limits can be set in **System Settings → Rate Limit**.
+- [enterprise.json](/openapi/enterprise.json) — Full Apifox export (135 endpoints)
+- [relay.json](/openapi/relay.json) — Relay API

@@ -2,18 +2,6 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
 const sidebars: SidebarsConfig = {
   docsSidebar: [
-    'intro',
-    {
-      type: 'category',
-      label: 'Getting Started',
-      collapsed: false,
-      items: [
-        'getting-started/installation',
-        'getting-started/docker',
-        'getting-started/environment-variables',
-        'getting-started/bt-panel',
-      ],
-    },
     {
       type: 'category',
       label: 'Guide',
@@ -26,11 +14,14 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'API',
+      label: 'API Reference',
+      collapsed: false,
       items: [
         'api/overview',
-        'api/relay',
-        'api/management',
+        'api/models',
+        'api/openai',
+        'api/anthropic',
+        'api/gemini',
       ],
     },
     {

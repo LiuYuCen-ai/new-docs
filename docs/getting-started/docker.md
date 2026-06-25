@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Docker Deployment
-description: Advanced Docker and Docker Compose configuration for New API.
+description: Advanced Docker and Docker Compose configuration for Webchannel.
 ---
 
 # Docker Deployment

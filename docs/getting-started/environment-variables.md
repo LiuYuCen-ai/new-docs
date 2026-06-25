@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: Environment Variables
-description: Complete environment variable reference for New API configuration.
+description: Complete environment variable reference for Webchannel configuration.
 ---
 
 # Environment Variables

@@ -1,14 +1,14 @@
 ---
 sidebar_position: 4
 title: Billing
-description: Quota management, billing policies, and payment integration in New API.
+description: Quota management, billing policies, and payment integration in Webchannel.
 ---
 
 # Billing & Quota
 
 ## Quota System
 
-New API uses an internal quota system for usage tracking:
+Webchannel uses an internal quota system for usage tracking:
 
 - **Quota** — Abstract currency unit for API consumption
 - **Ratio** — Model-specific pricing multiplier

@@ -1,5 +1,4 @@
 import type {ReactNode} from 'react';
-import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import Translate from '@docusaurus/Translate';
 import styles from './styles.module.css';
@@ -69,14 +68,12 @@ const FeatureList: FeatureItem[] = [
 
 function Feature({emoji, title, description}: FeatureItem) {
   return (
-    <div className={clsx('col col--4', styles.feature)}>
-      <div className="text--center">
-        <span className={styles.featureEmoji} role="img">{emoji}</span>
+    <div className={styles.feature}>
+      <div className={styles.featureIcon} role="img" aria-hidden>
+        {emoji}
       </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
-        <p>{description}</p>
-      </div>
+      <Heading as="h3">{title}</Heading>
+      <p>{description}</p>
     </div>
   );
 }
@@ -85,7 +82,17 @@ export default function HomepageFeatures(): ReactNode {
   return (
     <section className={styles.features}>
       <div className="container">
-        <div className="row">
+        <div className={styles.sectionHeading}>
+          <Heading as="h2">
+            <Translate id="homepage.features.title">Why Webchannel?</Translate>
+          </Heading>
+          <p>
+            <Translate id="homepage.features.desc">
+              Everything you need to deploy and manage AI services at scale.
+            </Translate>
+          </p>
+        </div>
+        <div className={styles.grid}>
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />
           ))}

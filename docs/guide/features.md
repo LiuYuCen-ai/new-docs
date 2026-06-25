@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: Features
-description: Core features of New API including UI, billing, security, and smart routing.
+description: Core features of Webchannel including UI, billing, security, and smart routing.
 ---
 
 # Features Overview

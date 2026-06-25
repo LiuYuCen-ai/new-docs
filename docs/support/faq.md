@@ -1,20 +1,20 @@
 ---
 sidebar_position: 1
 title: FAQ
-description: Frequently asked questions about New API installation and usage.
+description: Frequently asked questions about Webchannel installation and usage.
 ---
 
 # FAQ
 
 ## General
 
-### What is New API?
+### What is Webchannel?
 
-New API is an open-source LLM gateway that aggregates multiple AI providers behind a unified OpenAI-compatible API with billing, user management, and an admin dashboard.
+Webchannel is an open-source LLM gateway that aggregates multiple AI providers behind a unified OpenAI-compatible API with billing, user management, and an admin dashboard.
 
 ### Is it compatible with One API?
 
-Yes. New API is fully compatible with the original One API database schema.
+Yes. Webchannel is fully compatible with the original One API database schema.
 
 ## Installation
 
@@ -42,13 +42,13 @@ Check logs with `docker logs new-api`. Common causes:
 
 ### How does billing work?
 
-New API uses an internal quota system. Each model has a ratio multiplier. Token usage is converted to quota based on the model ratio and group pricing.
+Webchannel uses an internal quota system. Each model has a ratio multiplier. Token usage is converted to quota based on the model ratio and group pricing.
 
 ## API
 
 ### Can I use the OpenAI SDK?
 
-Yes. Point the OpenAI SDK to your New API gateway URL:
+Yes. Point the OpenAI SDK to your Webchannel gateway URL:
 
 ```python
 from openai import OpenAI

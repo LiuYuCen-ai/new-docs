@@ -4,28 +4,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const SITE_URL = process.env.SITE_URL || 'https://docs.newapi.pro';
 
-const plugins: Config['plugins'] = [];
-
-try {
-  plugins.push([
-    require.resolve('@easyops-cn/docusaurus-search-local'),
-    {
-      hashed: true,
-      language: ['en', 'zh', 'fr', 'ja', 'ru', 'vi'],
-      indexDocs: true,
-      indexBlog: true,
-      indexPages: true,
-      docsRouteBasePath: 'docs',
-      searchResultLimits: 8,
-      searchResultContextMaxLength: 50,
-    },
-  ]);
-} catch {
-  // Search plugin optional — site works without it
-}
-
 const config: Config = {
-  title: 'New API',
+  title: 'Webchannel',
   tagline: 'Next-Generation LLM Gateway and AI Asset Management System',
   favicon: 'img/logo.png',
 
@@ -62,7 +42,7 @@ const config: Config = {
       attributes: {
         name: 'keywords',
         content:
-          'New API, LLM gateway, AI API proxy, OpenAI, Claude, Gemini, API management, multi-model',
+          'Webchannel, LLM gateway, AI API proxy, OpenAI, Claude, Gemini, API management, multi-model',
       },
     },
     {
@@ -108,14 +88,12 @@ const config: Config = {
     ],
   ],
 
-  plugins,
-
   themeConfig: {
     image: 'img/logo.png',
     metadata: [
-      {name: 'description', content: 'Official documentation for New API — unified LLM gateway supporting OpenAI, Claude, Gemini and 40+ providers.'},
+      {name: 'description', content: 'Official documentation for Webchannel — unified LLM gateway supporting OpenAI, Claude, Gemini and 40+ providers.'},
       {property: 'og:type', content: 'website'},
-      {property: 'og:site_name', content: 'New API Docs'},
+      {property: 'og:site_name', content: 'Webchannel Docs'},
       {name: 'twitter:card', content: 'summary_large_image'},
     ],
     colorMode: {
@@ -129,9 +107,9 @@ const config: Config = {
       },
     },
     navbar: {
-      title: 'New API',
+      title: 'Webchannel',
       logo: {
-        alt: 'New API Logo',
+        alt: 'Webchannel Logo',
         src: 'img/logo.png',
       },
       items: [
@@ -139,14 +117,14 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'docsSidebar',
           position: 'left',
-          label: 'navbar.docs',
+          label: 'Documentation',
         },
         {
           to: '/api-reference',
-          label: 'navbar.api',
+          label: 'API',
           position: 'left',
         },
-        {to: '/blog', label: 'navbar.blog', position: 'left'},
+        {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/QuantumNous/new-api',
           label: 'GitHub',
@@ -154,7 +132,7 @@ const config: Config = {
         },
         {
           to: '/admin',
-          label: 'navbar.admin',
+          label: 'Admin',
           position: 'right',
         },
         {
@@ -167,29 +145,29 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'footer.docs',
+          title: 'Documentation',
           items: [
-            {label: 'footer.gettingStarted', to: '/docs/getting-started/installation'},
-            {label: 'footer.features', to: '/docs/guide/features'},
-            {label: 'footer.api', to: '/api-reference'},
+            {label: 'Getting Started', to: '/docs/getting-started/installation'},
+            {label: 'Features', to: '/docs/guide/features'},
+            {label: 'API Reference', to: '/api-reference'},
           ],
         },
         {
-          title: 'footer.community',
+          title: 'Community',
           items: [
             {label: 'GitHub', href: 'https://github.com/QuantumNous/new-api'},
             {label: 'Apifox Docs', href: 'https://ppf3lcwzqr.apifox.cn/'},
           ],
         },
         {
-          title: 'footer.more',
+          title: 'More',
           items: [
-            {label: 'footer.blog', to: '/blog'},
+            {label: 'Blog', to: '/blog'},
             {label: 'Docker Hub', href: 'https://hub.docker.com/r/calciumion/new-api'},
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} QuantumNous / New API. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} QuantumNous / Webchannel. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
