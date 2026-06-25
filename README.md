@@ -2,32 +2,18 @@
 
 Official documentation for [Webchannel](https://github.com/QuantumNous/new-api) — a next-generation LLM gateway and AI asset management system.
 
-Built with [Docusaurus](https://docusaurus.io/) for SEO-friendly static site generation, multi-language support, and an admin CMS for content management.
-
+Built with [Docusaurus](https://docusaurus.io/) for SEO-friendly static site generation, multi-language support
 ## Features
 
 - **SEO Optimized** — Static generation, sitemap, meta tags, Open Graph, RSS/Atom feeds
 - **Multi-language** — English, 简体中文, 繁體中文, Français, 日本語, Русский, Tiếng Việt
 - **Public Access** — All documentation pages are accessible without login
-- **Admin CMS** — Login at `/admin` to edit documentation content
-- **Apifox Integration** — 135 endpoints from enterprise Apifox export + Redoc viewer
 - **OpenAPI Specs** — enterprise.json, relay.json, api.json
 
 ## Quick Start
 
 ### Development
 
-```bash
-# Install dependencies
-npm install
-cd admin-server && npm install && cd ..
-
-# Start docs site — English only (port 3000)
-npm start
-
-# Start admin server (port 4000) — in another terminal
-npm run admin
-```
 
 > **多语言开发说明：** `npm start` 默认只加载 **英文**。直接访问 `/zh-CN/` 会 404。
 >
@@ -36,12 +22,6 @@ npm run admin
 >
 > 生产环境（Docker / `npm run build`）所有语言均可正常访问。
 
-### Admin Login
-
-Default credentials (change in production):
-
-- **Username:** `admin`
-- **Password:** `admin123`
 
 Configure via `admin-server/.env`:
 
@@ -116,8 +96,7 @@ new-api-docs/
 │   └── ...
 ├── src/pages/
 │   ├── index.tsx          # Homepage
-│   ├── api-reference.tsx  # Apifox API docs embed
-│   └── admin.tsx          # Admin CMS UI
+│   └── api-reference.tsx  # Apifox API docs embed
 ├── admin-server/          # Content management API
 ├── static/openapi/        # OpenAPI JSON specs
 └── docusaurus.config.ts   # Site configuration
@@ -131,7 +110,6 @@ new-api-docs/
 
 ## API Documentation
 
-- **Apifox:** https://ppf3lcwzqr.apifox.cn/
 - **Built-in:** `/api-reference` page
 - **OpenAPI:** `/openapi/relay.json`, `/openapi/api.json`
 
