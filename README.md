@@ -27,7 +27,6 @@ Configure via `admin-server/.env`:
 
 ```bash
 cp admin-server/.env.example admin-server/.env
-# Edit ADMIN_USERNAME, ADMIN_PASSWORD, JWT_SECRET
 ```
 
 ### Production Build
@@ -42,7 +41,6 @@ npm run serve
 ```bash
 docker compose up -d
 # Docs: http://localhost:8080
-# Admin API: http://localhost:4000
 ```
 
 ## Multi-language
@@ -96,8 +94,7 @@ new-api-docs/
 │   └── ...
 ├── src/pages/
 │   ├── index.tsx          # Homepage
-│   └── api-reference.tsx  # Apifox API docs embed
-├── admin-server/          # Content management API
+│   └── api-reference.tsx 
 ├── static/openapi/        # OpenAPI JSON specs
 └── docusaurus.config.ts   # Site configuration
 ```

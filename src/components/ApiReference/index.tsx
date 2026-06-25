@@ -14,8 +14,6 @@ import ApiEndpointDetail from './EndpointDetail';
 import ApiCodePanel from './CodePanel';
 import styles from './styles.module.css';
 
-const APIFOX_URL = 'https://ppf3lcwzqr.apifox.cn/';
-
 function ExplorerInner(): ReactNode {
   const history = useHistory();
   const location = useLocation();
@@ -104,31 +102,6 @@ function ExplorerInner(): ReactNode {
 
   return (
     <div className={styles.explorer} style={layoutStyle as CSSProperties}>
-      <header className={styles.topBar}>
-        <div className={styles.topBarInner}>
-          <div className={styles.topBarSidebarSlot} aria-hidden="true" />
-          <div className={styles.topBarCenter}>
-            <div className={styles.topBarTitle}>
-              <Translate id="api.title">API Reference</Translate>
-            </div>
-            <div className={styles.topBarActions}>
-              <a
-                className={clsx('button', 'button--sm', styles.topBtnPrimary)}
-                href={APIFOX_URL}
-                target="_blank"
-                rel="noopener noreferrer">
-                <Translate id="api.ref.tryApifox">Try in Apifox</Translate>
-              </a>
-              <a
-                className={clsx('button', 'button--sm', 'button--outline', styles.topBtn)}
-                href={openapiUrl}
-                download={openapiFile}>
-                <Translate id="api.downloadOpenapi">Download OpenAPI</Translate>
-              </a>
-            </div>
-          </div>
-        </div>
-      </header>
 
       <div className={styles.layout}>
         <ApiSidebar
